@@ -45,4 +45,11 @@ namespace ProgramLogic
               
         }
     }
+
+    //enum Genre
+    //{
+    //    Rock, 
+    //    Pop, 
+    //    Classic
+    //}
 }

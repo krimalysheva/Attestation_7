@@ -30,8 +30,8 @@ namespace L1_Form
         public MainWindow()
         {
             InitializeComponent();
-            //using (System.Threading.Thread.CurrentThread.CurrentCulture = System.Globalization.CultureInfo.IDisposable.InvariantCulture) ;
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            disk = new Disk();
         }
 
         private void MainWindow_Load(object sender, EventArgs e)
@@ -43,7 +43,8 @@ namespace L1_Form
         {
             try
             {
-                //List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
+                List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
+                disk.Compositions = compositions;
                 disk.Sort();
                 CompositionsDGVConvert.CompositionsListToDGV(InputCompositionsDGV, disk.Compositions);
             }
@@ -99,6 +100,7 @@ namespace L1_Form
             try
             {
                 List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
+                disk.Compositions = compositions;
                 countSoundlbl.Text = Convert.ToString(disk.Duration);
             }
             catch (Exception ex)
@@ -112,6 +114,7 @@ namespace L1_Form
             try
             {
                 List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
+                disk.Compositions = compositions;
                 List<Composition> foundedCompositions = disk.Search((double)Fromnum.Value, (double)Tonum.Value);
 
                 string result = "";

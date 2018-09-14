@@ -11,6 +11,11 @@ namespace ProgramLogic
         public List<Composition> Compositions { get; set; } = new List<Composition>();
         public double Duration => Compositions.Sum(x => x.Time);
 
+        public Disk()
+        {
+
+        }
+
         public Disk(List<Composition> compositions)
         {
             Compositions = compositions;

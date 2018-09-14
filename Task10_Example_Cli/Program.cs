@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 using Utils;
 using ProgramLogic;
 using System.IO;
+using System.Threading;
+using System.Globalization;
 
 namespace L1_Cli
 {
     class Program
     {
+        private static Disk disk = new Disk();
+
         static List<Composition> ReadCompositionsList()
         {
             List<Composition> compositions;
@@ -29,7 +33,7 @@ namespace L1_Cli
                     }
                     catch (Exception e)
                     {
-
+                        Console.WriteLine(e.Message);
                     }
                 }
             }
@@ -90,20 +94,22 @@ namespace L1_Cli
 
         static void Main(string[] args)
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
             while (true)
             {
 
                 // Читаем список 
                 List<Composition> compositions = ReadCompositionsList();
-
+                disk.Compositions = compositions;
                 // Сортируем список 
-                List<Composition> sortedCompositions = disk.Sort();
+                disk.Sort();
 
-                PrintStudentsList(sortedCompositions);
+                PrintStudentsList(disk.Compositions);
 
                 if (ConsoleUtils.Confirm("Сохранить список в файл?"))
                 {
-                    SaveCompositionsToFile(sortedCompositions);
+                    SaveCompositionsToFile(disk.Compositions);
                 }
 
                 if (ConsoleUtils.Confirm("Продолжить работу с программой?"))
