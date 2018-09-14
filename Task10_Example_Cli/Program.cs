@@ -97,7 +97,7 @@ namespace L1_Cli
                 List<Composition> compositions = ReadCompositionsList();
 
                 // Сортируем список 
-                List<Composition> sortedCompositions = Disk.Sort(compositions);
+                List<Composition> sortedCompositions = disk.Sort();
 
                 PrintStudentsList(sortedCompositions);
 

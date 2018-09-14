@@ -8,37 +8,41 @@ namespace ProgramLogic
 {
     public class Disk
     {
-        public static List<Composition> Sort(List<Composition> composition)
+        public List<Composition> Compositions { get; set; } = new List<Composition>();
+        public double Duration => Compositions.Sum(x => x.Time);
+
+        public Disk(List<Composition> compositions)
         {
-            List<Composition> newCompositionList = new List<Composition>(composition);
-            newCompositionList.Sort();
-            return newCompositionList;
+            Compositions = compositions;
         }
 
-        public static double CountSound(List<Composition> compositions)
+        public void Sort()
         {
-            double duration = 0.0;
-
-            foreach (Composition composition in compositions)
-            {
-                duration += composition.Time;
-            }
-
-            return duration;
+            Compositions.Sort();
         }
 
-        public static List<Composition> Search(List<Composition> compositions, double from, double to)
+        //public static double CountSound(List<Composition> compositions)
+        //{
+        //    double duration = 0.0;
+
+        //    foreach (Composition composition in compositions)
+        //    {
+        //        duration += composition.Time;
+        //    }
+
+        //    return duration;
+        //}
+
+        public List<Composition> Search(double from, double to)
         {
-            //List<Composition> newCompositionList = new List<Composition>(composition);
             List<Composition> newCompositionList = new List<Composition>();
-            foreach (Composition composition in compositions)
+            foreach (Composition composition in Compositions)
             {
                 if (composition.Time > from && composition.Time < to)
                     newCompositionList.Add(composition);
                 else continue;
             }
             return newCompositionList;
-
         }
 
     }

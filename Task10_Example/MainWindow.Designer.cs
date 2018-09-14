@@ -157,6 +157,7 @@
             // 
             // Fromnum
             // 
+            this.Fromnum.DecimalPlaces = 2;
             this.Fromnum.Increment = new decimal(new int[] {
             25,
             0,
@@ -170,6 +171,7 @@
             // 
             // Tonum
             // 
+            this.Tonum.DecimalPlaces = 2;
             this.Tonum.Increment = new decimal(new int[] {
             25,
             0,

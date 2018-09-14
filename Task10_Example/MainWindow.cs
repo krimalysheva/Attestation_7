@@ -25,6 +25,8 @@ namespace L1_Form
 {
     public partial class MainWindow : Form
     {
+        private Disk disk;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,8 +43,9 @@ namespace L1_Form
         {
             try
             {
-                List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
-                CompositionsDGVConvert.CompositionsListToDGV(InputCompositionsDGV, Disk.Sort(compositions));
+                //List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
+                disk.Sort();
+                CompositionsDGVConvert.CompositionsListToDGV(InputCompositionsDGV, disk.Compositions);
             }
             catch (Exception ex)
             {
@@ -59,7 +62,8 @@ namespace L1_Form
                     string path = OpenFileDialog.FileName;
 
                     List<Composition> compositionsList = CompositionsFilesUtils.ReadCompositionFromFile(path);
-                    CompositionsDGVConvert.CompositionsListToDGV(InputCompositionsDGV, compositionsList);
+                    disk = new Disk(compositionsList);
+                    CompositionsDGVConvert.CompositionsListToDGV(InputCompositionsDGV, disk.Compositions);
 
                     MessagesUtils.ShowMessage("Данные загружены из файла");
                 }
@@ -95,7 +99,7 @@ namespace L1_Form
             try
             {
                 List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
-                countSoundlbl.Text = Convert.ToString(Disk.CountSound(compositions));
+                countSoundlbl.Text = Convert.ToString(disk.Duration);
             }
             catch (Exception ex)
             {
@@ -108,7 +112,7 @@ namespace L1_Form
             try
             {
                 List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
-                List<Composition> foundedCompositions = Disk.Search(compositions, (double)Fromnum.Value, (double)Tonum.Value);
+                List<Composition> foundedCompositions = disk.Search((double)Fromnum.Value, (double)Tonum.Value);
 
                 string result = "";
 
