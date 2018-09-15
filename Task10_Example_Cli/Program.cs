@@ -15,6 +15,36 @@ namespace L1_Cli
     {
         private static Disk disk = new Disk();
 
+        static void Main(string[] args)
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+
+            while (true)
+            {
+
+                // Читаем список 
+                List<Composition> compositions = ReadCompositionsList();
+                disk.WriteCompositions(compositions);
+                // Сортируем список 
+                disk.Sort();
+
+                PrintList(disk.Compositions);
+
+                if (ConsoleUtils.Confirm("Сохранить список в файл?"))
+                {
+                    SaveCompositionsToFile(disk.Compositions);
+                }
+
+                if (ConsoleUtils.Confirm("Продолжить работу с программой?"))
+                {
+                    Console.Clear();
+                    continue;
+                }
+
+                break;
+            }
+        }
+
         static List<Composition> ReadCompositionsList()
         {
             List<Composition> compositions;
@@ -73,53 +103,25 @@ namespace L1_Cli
                 }
                 catch (Exception e)
                 {
-
+                    Console.WriteLine(e.Message);
                 }
             }
 
             Console.WriteLine();
         }
 
-        static void PrintStudentsList(List<Composition> compositions)
+        static void PrintList(List<Composition> compositions)
         {
             Console.WriteLine("Отсортированный список: ");
 
             foreach (Composition composition in compositions)
             {
-                Console.WriteLine(composition.Name + " " + composition.Time);
+                Console.WriteLine($"\"{composition.Name}\" {composition.Time} {composition.Genre}"); //интерполяция строк. выражения в скобках заменяются их строковым представлением
             }
 
             Console.WriteLine();
         }
 
-        static void Main(string[] args)
-        {
-            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-
-            while (true)
-            {
-
-                // Читаем список 
-                List<Composition> compositions = ReadCompositionsList();
-                disk.Compositions = compositions;
-                // Сортируем список 
-                disk.Sort();
-
-                PrintStudentsList(disk.Compositions);
-
-                if (ConsoleUtils.Confirm("Сохранить список в файл?"))
-                {
-                    SaveCompositionsToFile(disk.Compositions);
-                }
-
-                if (ConsoleUtils.Confirm("Продолжить работу с программой?"))
-                {
-                    Console.Clear();
-                    continue;
-                }
-
-                break;
-            }
-        }
+        
     }
 }

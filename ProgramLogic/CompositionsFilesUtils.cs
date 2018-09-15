@@ -16,11 +16,11 @@ namespace ProgramLogic
             string[] fileLines = File.ReadAllLines(path);
 
             foreach (string line in fileLines) {
-                string[] parts = line.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] parts = line.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries);
 
-                string name = parts[0] + " " + parts[1];
-                double time = double.Parse(parts[2]);
-                string genre = parts[3];
+                string name = parts[0];
+                double time = double.Parse(parts[1]);
+                string genre = parts[2];
                 compositionsList.Add(new Composition(name, time, genre));
             }
 
@@ -31,7 +31,7 @@ namespace ProgramLogic
             List<string> lines = new List<string>();
 
             foreach (Composition composition in compositions) {
-                lines.Add(composition.Name + " " + composition.Time + " "+ composition.Genre);
+                lines.Add(composition.Name + ":" + composition.Time + ":"+ composition.Genre);
             }
 
             File.WriteAllLines(path, lines);

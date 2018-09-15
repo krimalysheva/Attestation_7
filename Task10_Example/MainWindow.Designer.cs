@@ -45,6 +45,7 @@
             this.Fromnum = new System.Windows.Forms.NumericUpDown();
             this.Tonum = new System.Windows.Forms.NumericUpDown();
             this.searchlbl = new System.Windows.Forms.Label();
+            this.ApplyBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.InputCompositionsDGV)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Fromnum)).BeginInit();
@@ -81,9 +82,9 @@
             // 
             // SortCompositionsbttn
             // 
-            this.SortCompositionsbttn.Location = new System.Drawing.Point(13, 372);
+            this.SortCompositionsbttn.Location = new System.Drawing.Point(237, 374);
             this.SortCompositionsbttn.Name = "SortCompositionsbttn";
-            this.SortCompositionsbttn.Size = new System.Drawing.Size(387, 34);
+            this.SortCompositionsbttn.Size = new System.Drawing.Size(219, 34);
             this.SortCompositionsbttn.TabIndex = 1;
             this.SortCompositionsbttn.Text = "Сортировать";
             this.SortCompositionsbttn.UseVisualStyleBackColor = true;
@@ -134,7 +135,7 @@
             this.countSoundbttn.TabIndex = 3;
             this.countSoundbttn.Text = "Продолжительность: \r\n";
             this.countSoundbttn.UseVisualStyleBackColor = true;
-            this.countSoundbttn.Click += new System.EventHandler(this.countSoundbttn_Click);
+            this.countSoundbttn.Click += new System.EventHandler(this.CountSoundbttn_Click);
             // 
             // countSoundlbl
             // 
@@ -192,11 +193,22 @@
             this.searchlbl.TabIndex = 8;
             this.searchlbl.Text = "пук";
             // 
+            // ApplyBtn
+            // 
+            this.ApplyBtn.Location = new System.Drawing.Point(12, 374);
+            this.ApplyBtn.Name = "ApplyBtn";
+            this.ApplyBtn.Size = new System.Drawing.Size(219, 34);
+            this.ApplyBtn.TabIndex = 9;
+            this.ApplyBtn.Text = "Записать изменения на диск";
+            this.ApplyBtn.UseVisualStyleBackColor = true;
+            this.ApplyBtn.Click += new System.EventHandler(this.ApplyBtn_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(606, 411);
+            this.Controls.Add(this.ApplyBtn);
             this.Controls.Add(this.searchlbl);
             this.Controls.Add(this.Tonum);
             this.Controls.Add(this.Fromnum);
@@ -239,6 +251,7 @@
         private System.Windows.Forms.NumericUpDown Fromnum;
         private System.Windows.Forms.NumericUpDown Tonum;
         private System.Windows.Forms.Label searchlbl;
+        private System.Windows.Forms.Button ApplyBtn;
     }
 }
 

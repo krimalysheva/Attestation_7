@@ -43,8 +43,6 @@ namespace L1_Form
         {
             try
             {
-                List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
-                disk.Compositions = compositions;
                 disk.Sort();
                 CompositionsDGVConvert.CompositionsListToDGV(InputCompositionsDGV, disk.Compositions);
             }
@@ -95,12 +93,10 @@ namespace L1_Form
             }
         }
 
-        private void countSoundbttn_Click(object sender, EventArgs e)
+        private void CountSoundbttn_Click(object sender, EventArgs e)
         {
             try
             {
-                List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
-                disk.Compositions = compositions;
                 countSoundlbl.Text = Convert.ToString(disk.Duration);
             }
             catch (Exception ex)
@@ -113,8 +109,6 @@ namespace L1_Form
         {
             try
             {
-                List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
-                disk.Compositions = compositions;
                 List<Composition> foundedCompositions = disk.Search((double)Fromnum.Value, (double)Tonum.Value);
 
                 string result = "";
@@ -131,6 +125,12 @@ namespace L1_Form
                 MessagesUtils.ShowError("Произошла ошибка!");
             }
 
+        }
+
+        private void ApplyBtn_Click(object sender, EventArgs e)
+        {
+            List<Composition> compositions = CompositionsDGVConvert.DGVToCompositionsList(InputCompositionsDGV);
+            disk.WriteCompositions(compositions);
         }
     }
 }
